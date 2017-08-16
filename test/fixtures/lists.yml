@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2017-08-16
+  link_token: MyString
+
+two:
+  date: 2017-08-16
+  link_token: MyString
