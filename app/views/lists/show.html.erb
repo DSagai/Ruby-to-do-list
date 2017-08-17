@@ -1,0 +1,31 @@
+<%- model_class = List -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:date) %></th>
+    <th><%= @list.date %></th>
+  </tr>
+
+  <tr>
+    <th>Task body</th>
+    <th>Done</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @list.tasks.all.each do |t|%>
+      <tr>
+        <td>
+          <%= t.task_body %>
+        </td>
+        <td>
+          <input type="checkbox" disabled="true" <%= t.done ? "checked" : "" %> />
+        </td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>

@@ -1,0 +1,6 @@
+<ul>
+  <% @lists.each do |l| %>
+    <li> <%= link_to l.date, list_path(l.link_token)%></li>
+  <% end %>
+</ul>
+<%= link_to "Log out", destroy_user_session_path, method: :delete %>
