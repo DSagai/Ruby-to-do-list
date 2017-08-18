@@ -34,7 +34,12 @@ class ListsController < ApplicationController
   end
 
   def update
-
+    if @list.update(date: params[:list][:date])
+      # render action: "edit", notice: 'List was successfully updated.'
+      redirect_to list_path(@list.link_token), notice: 'List date was successfully updated to ' + @list.date.to_s
+    else
+      render action: "edit", notice: 'List update was unsuccessful.'
+    end
   end
 
   def destroy
@@ -49,7 +54,7 @@ class ListsController < ApplicationController
   end
 
   private def check_auth
-
+    get_list
     if current_user != @list.user
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
