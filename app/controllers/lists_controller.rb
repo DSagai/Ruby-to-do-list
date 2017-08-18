@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
-before_action :get_list, only: [:show, :edit, :update, :destroy]
-before_action :check_auth, only: [:edit, :update, :destroy]
+  before_action :get_list, only: [:check_auth, :show, :edit, :update, :destroy]
+  before_action :check_auth, only: [:edit, :update, :destroy]
 
 
   #GET /lists
@@ -18,6 +18,17 @@ before_action :check_auth, only: [:edit, :update, :destroy]
     end
   end
 
+  def create
+    if current_user
+      @list = current_user.lists.create(date: params[:list][:date])
+      respond_to do |format|
+        format.js
+      end
+    else
+      render :file => "#{Rails.root}/public/422", :layout => false, :status => :forbiden
+    end
+  end
+
   def edit
 
   end
@@ -27,7 +38,10 @@ before_action :check_auth, only: [:edit, :update, :destroy]
   end
 
   def destroy
-
+    @list.destroy
+    respond_to do |format|
+      format.js
+    end
   end
 
   private def get_list
@@ -35,6 +49,7 @@ before_action :check_auth, only: [:edit, :update, :destroy]
   end
 
   private def check_auth
+
     if current_user != @list.user
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end

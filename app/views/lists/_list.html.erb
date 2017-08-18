@@ -1,0 +1,5 @@
+<tr id="<%= list.link_token %>">
+  <td> <%= link_to list.date, list_path(list.link_token) %> </td>
+  <td> <%= link_to "delete", list_path(list.link_token), method: :delete, remote: true,
+                   confirm: "Are you really want to delete list?" %> </td>
+</tr>

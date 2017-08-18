@@ -30,9 +30,11 @@
         <a class="navbar-brand" href="#">RubyToDoList</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/path1"  %></li>
-            <li><%= link_to "Link2", "/path2"  %></li>
-            <li><%= link_to "Link3", "/path3"  %></li>
+            <% if current_user %>
+                <li><%= link_to  "#{current_user.email} log out", destroy_user_session_path, method: :delete,
+                                 confirm: "do you really want to log out?"%></li>
+            <% end %>
+
           </ul>
         </div>
       </div>

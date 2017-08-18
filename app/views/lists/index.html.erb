@@ -1,6 +1,23 @@
-<ul>
-  <% @lists.each do |l| %>
-    <li> <%= link_to l.date, list_path(l.link_token)%></li>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Schedule</th>
+  </tr>
+  </thead>
+  <tbody id="Lists">
+  <% @lists.each do |list| %>
+      <%= render list%>
   <% end %>
-</ul>
-<%= link_to "Log out", destroy_user_session_path, method: :delete %>
+  </tbody>
+</table>
+
+
+
+
+<%= form_for(List.new, remote: true) do |f| %>
+    <div>
+      <%= f.label "Add new list" %> <br>
+      <%= f.date_field :date, value: Date.today %>
+    </div>
+    <%= f.submit %>
+<% end %>
