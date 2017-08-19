@@ -1,6 +1,6 @@
 <h4>Editing</h4>
 
-<%= form_for(@list, url: list_path(@list.link_token)) do |f| %>
+<%= form_for @list do |f| %>
     <div>
       <%= f.label "Appoint list on a different date" %> <br>
       <%= f.date_field :date, value: @list.date %>
@@ -19,26 +19,15 @@
   </thead>
   <tbody id="Tasks">
 
-    <%= render @list.tasks %>
+  <%= render @list.tasks %>
 
   </tbody>
 </table>
 <br>
-
-<%= form_for Task.new, url:new_list_task_path(@list.link_token),  remote: true do |f| %>
-    <table>
-      <tr>
-        <td><%= f.label "To do:" %> <br></td>
-        <td><%= f.text_field :task_body %> <br></td>
-      </tr>
-      <tr>
-        <td>
-          <%= f.submit %>
-        </td>
-      </tr>
-    </table>
+<%= form_for([@list, Task.new] , remote: true) do |f| %>
+    <%= f.text_field :task_body %>
+    <%= f.submit %>
 <% end %>
-<br>
 
 <p>
   <%= link_to "Back to main page", lists_path %>

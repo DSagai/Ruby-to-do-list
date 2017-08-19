@@ -50,7 +50,7 @@ class ListsController < ApplicationController
   end
 
   private def get_list
-    @list = List.find_by_token(params[:id])
+    @list = List.find(params[:id])
   end
 
   private def check_auth

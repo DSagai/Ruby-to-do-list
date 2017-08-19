@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816195025) do
+ActiveRecord::Schema.define(version: 20170819151849) do
 
-  create_table "lists", force: :cascade do |t|
+  create_table "lists", id: false, force: :cascade do |t|
     t.date "date"
     t.string "link_token"
     t.integer "user_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170816195025) do
   create_table "tasks", force: :cascade do |t|
     t.string "task_body"
     t.boolean "done", default: false
-    t.integer "list_id"
+    t.string "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["done"], name: "index_tasks_on_done"
