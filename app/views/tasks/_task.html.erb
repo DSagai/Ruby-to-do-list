@@ -1,8 +1,10 @@
-<tr>
-  <td>
+<tr id="taskId=<%= task.id %>">
+  <td class="col-md-6">
     <%= task.task_body %>
   </td>
-  <td>
-    <input type="checkbox"  <%= task.done ? "checked" : "" %> />
+  <td class="col-md-2">
+    <input type="checkbox" class="task_done" id="task_done_<%= task.id %>"  <%= task.done ? "checked" : "" %> />
+    <%= link_to "Delete", [task.list ,task], confirm: 'Are you sure?', method: :delete, remote: true,
+    class: "pull-right" %>
   </td>
 </tr>

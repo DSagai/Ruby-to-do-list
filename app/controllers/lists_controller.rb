@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
-  before_action :get_list, only: [:check_auth, :show, :edit, :update, :destroy]
-  before_action :check_auth, only: [:edit, :update, :destroy]
+  before_action :get_list, only: [:check_owner, :show, :edit, :update, :destroy]
+  before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
 
 
   #GET /lists
@@ -53,8 +54,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
   end
 
-  private def check_auth
-    get_list
+  private def check_owner
     if current_user != @list.user
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
