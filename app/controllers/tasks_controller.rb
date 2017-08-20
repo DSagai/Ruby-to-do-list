@@ -22,6 +22,22 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = @list.tasks.find(params[:id])
+    puts(params[:task])
+    if @task.update_attributes(params.require("task").permit("task_body", "done"))
+      redirect_to @list, notice: 'Task was successfully updated.'
+    else
+      redirect_to @list, status: :unprocessable_entity
+    end
+
+  end
+
+
+  def edit
+    @task = @list.tasks.find(params[:id])
+  end
+
   private def get_list
     @list = List.find(params[:list_id])
   end
@@ -31,5 +47,6 @@ class TasksController < ApplicationController
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
   end
+
 
 end
