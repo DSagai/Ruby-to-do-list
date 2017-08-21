@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :lists do
     resources :tasks
   end
+
+  mount ActionCable.server => '/cable'
 end

@@ -1,0 +1,8 @@
+<tr id="task_id_<%= task.id %>">
+  <td id="task_body_<%= task.id %>">
+    <%= task.task_body %>
+  </td>
+  <td>
+    <input id="done_<%= task.id %>" type="checkbox" disabled="true" <%= task.done ? "checked" : "" %> />
+  </td>
+</tr>

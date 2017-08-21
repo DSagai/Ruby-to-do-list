@@ -8,7 +8,8 @@ class TasksController < ApplicationController
 
 
   def create
-    @task = @list.tasks.create(task_body: params[:task][:task_body])
+    puts params[:task]
+    @task = @list.tasks.create(params.require("task").permit("task_body", "done"))
     respond_to do |format|
       format.js
     end
@@ -16,7 +17,8 @@ class TasksController < ApplicationController
 
   def destroy
     @task = @list.tasks.find(params[:id])
-    @task.destroy
+    if @task.destroy
+    end
     respond_to do |format|
       format.js
     end
@@ -47,6 +49,7 @@ class TasksController < ApplicationController
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found
     end
   end
+
 
 
 end
